@@ -1,0 +1,25 @@
+Basic:
+1. unzip -d titanic titanic.zip
+2. number of rows: wc -l titanic/train.csv | cut -f 1 -d ' '
+   number of fields: head -1 titanic/train.csv | tr , '\n' | wc -l
+3. first 5 lines: head -n 5 titanic/train.csv
+   last 5 lines: tail -n 5 titanic/train.csv
+4. cat titanic/trains.csv | less
+5. tail -n +2 titanic/train.csv | cut -d \" -f 2
+6. tail -n 5 titanic/train.csv > train_tail.csv
+7. tail -n +3 titanic/train.csv | head -n 3
+8. This script will recursively print all the folders and files in the working directory, pipe them into sort which will sort the lines in descending order based on their beginning (file or folder size) and finally pipe them into head which will keep only the first 20 entries. The script will display the 20 biggest files and folders.
+9. split -d -l 20 --additional-suffix=.csv train.csv train_
+
+1. unzip -d ~/ultratrail ultratrail-du-montblanc.zip
+2. Please see for_loop
+3. Please see backup_csv
+
+Reach:
+1. Please see extension_suggestions
+2. Please see clean_files for script. To execute the task daily, execute 'crontab -e' in the CLI, add a line:
+PATH=$HOME/.local/bin:$PATH
+and another line:
+0 8 * * * clean_files 20
+if for example we want to keep only the 20 first lines
+The script must be saved in the $HOME/.local/bin folder and 'chmod u+x $HOME/.local/bin/clean_files' must be executed to make it executable.

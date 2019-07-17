@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+for file in ~/ultratrail/ultratrail-du-montblanc/*.csv;
+do
+    cp $file ~/ultratrail/backups/bkp-${file##*/}
+done

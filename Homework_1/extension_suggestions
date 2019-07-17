@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+declare -A extensions
+extensions[1]=csv
+extensions[2]=xlsx
+extensions[3]=pdf
+extensions[4]=doc
+extensions[5]=txt
+echo 'What file extension would you like to use?
+1. csv  2. xlsx 3. pdf  4. doc 5. txt
+Please type a number:'
+read choice
+if [[ $choice =~ ^[12345]$ ]]
+then
+    file_extension=${extensions[$choice]}
+else
+    echo 'This is no a valid choice'
+    exit
+fi
+echo 'Please type your file name:'
+read file_name
+touch ${file_name}.${file_extension}
+echo ${file_name}.${file_extension} created

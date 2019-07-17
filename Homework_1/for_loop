@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+for file in ~/ultratrail/ultratrail-du-montblanc/*.csv;
+do
+    echo ${file##*/}:
+    echo `head -1 $file | tr , '\n' | wc -l` fields
+    echo `wc -l $file | cut -f 1 -d ' '` rows
+    echo `head -n 2 $file`
+    echo
+done
