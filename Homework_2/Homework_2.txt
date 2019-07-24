@@ -1,0 +1,179 @@
+Basic
+1.
+    1: int
+    3.14: float
+    "Big Data!": str
+    'Big Data!': str
+    True: bool
+    False: bool
+    [1,2,"intruder",3]: list, (int, int, str, and int respectively)
+
+2.
+    #!/usr/bin/env python3
+    for i in range(1, 101):
+        if i % 15 == 0:
+            print('FizzBuzz')
+        elif i % 3 == 0:
+            print('Fizz')
+        elif i % 5 == 0:
+            print('Buzz')
+        else:
+            print(i)
+3.
+    maximum: max([1,2,3])
+    minimum: min([1,2,3])
+    sum(i for i in range(1000) if i % 3 == 0 or i % 5 == 0)
+4.
+    #!/usr/bin/env python3
+    phrase = input('Please type a sentence:\n')
+    print(''.join(letter for letter in phrase if letter.upper() not in ('A', 'E', 'I', 'O', 'U', 'Y')))
+
+Advanced
+1.
+    #!/usr/bin/env python3
+    from collections import defaultdict
+    phrase = input('Please type a phrase:\n')
+    letters = defaultdict(int)
+    ranking = None
+    while ranking not in (1, 2):
+        try:
+            ranking = int(input('Sort alphabetically or by frequency?\n1. '
+            'Alphabetically 2. By frequency\n'))
+        except ValueError:
+            pass
+        if ranking not in (1, 2):
+            print('\nPlease choose a number between 1 and 2:')
+    for letter in phrase:
+        if letter.isalpha():
+            letters[letter.lower()] += 1
+    if ranking == 1:
+        print(dict(sorted(letters.items())))
+    elif ranking == 2:
+        print(dict(sorted(
+            letters.items(),
+            key=lambda item: item[1],
+            reverse=True,
+        )))
+2.
+    #!/usr/bin/env python3
+    from collections import defaultdict
+    phrase = input('Please type a phrase:\n')
+    words = defaultdict(int)
+    for word in phrase.split():
+        words[word.lower()] += 1
+    print(dict(words))
+3.
+    #!/usr/bin/env python3
+    words = input('Please type a list of comma separated words:\n').split(',')
+    print(sorted(set(words)))
+
+Reach
+1.
+    #!/usr/bin/env python3
+    # First list of integers:
+    list_1_approved = False
+    while not list_1_approved:
+        numbers = input('Please type a list of at least 4 comma separated '
+            'integers:\n').split(',')
+        if len(numbers) > 3:
+            for number in numbers:
+                try:
+                    int(number)
+                    list_1_approved = True
+                except ValueError:
+                    print('\nThe list must be made of integers')
+                    list_1_approved = False
+                    break
+        else:
+            print('\nThe list must have at least 4 integers')
+    # Second list of integers:
+    list_2_approved = False
+    while not list_2_approved:
+        numbers_2 = input('Please type a second list of at least 4 comma '
+            'separated integers:\n').split(',')
+        if len(numbers_2) > 3:
+            for number in numbers_2:
+                try:
+                    int(number)
+                    list_2_approved = True
+                except ValueError:
+                    print('\nThe list must be made of integers')
+                    list_2_approved = False
+                    break
+        else:
+            print('\nThe list must have at least 4 integers')
+
+    numbers_set = set([int(number) for number in numbers] \
+        + [int(number) for number in numbers_2])
+    print(sorted(numbers_set))
+2.
+    #!/usr/bin/env python3
+    # First list of integers:
+    list_1_approved = False
+    while not list_1_approved:
+        numbers = input('Please type a list of at least 4 comma separated '
+            'integers:\n').split(',')
+        if len(numbers) > 3:
+            for number in numbers:
+                try:
+                    int(number)
+                    list_1_approved = True
+                except ValueError:
+                    print('\nThe list must be made of integers')
+                    list_1_approved = False
+                    break
+        else:
+            print('\nThe list must have at least 4 integers')
+    # Second list of integers:
+    list_2_approved = False
+    while not list_2_approved:
+        numbers_2 = input('Please type a second list of at least 4 comma '
+            'separated integers:\n').split(',')
+        if len(numbers_2) > 3:
+            for number in numbers_2:
+                try:
+                    int(number)
+                    list_2_approved = True
+                except ValueError:
+                    print('\nThe list must be made of integers')
+                    list_2_approved = False
+                    break
+        else:
+            print('\nThe list must have at least 4 integers')
+
+    numbers_set = set([int(number) for number in numbers] \
+        + [int(number) for number in numbers_2])
+
+    # Source: https://www.geeksforgeeks.org/coin-change-dp-7/
+    # Returns the count of ways we can sum
+    # S[0...m-1] coins to get sum n
+    def count(S, m, n ):
+
+        # If n is 0 then there is 1
+        # solution (do not include any coin)
+        if (n == 0):
+            return 1
+
+        # If n is less than 0 then no
+        # solution exists
+        if (n < 0):
+            return 0;
+
+        # If there are no coins and n
+        # is greater than 0, then no
+        # solution exist
+        if (m <=0 and n >= 1):
+            return 0
+
+        # count is sum of solutions (i)
+        # including S[m-1] (ii) excluding S[m-1]
+        return count( S, m - 1, n ) + count( S, m, n-S[m-1] );
+
+    final_numbers_set = set()
+    for number in sorted(numbers_set):
+        if len(final_numbers_set) == 0:
+            final_numbers_set.add(number)
+        else:
+            if not count(list(final_numbers_set), len(final_numbers_set), number):
+                final_numbers_set.add(number)
+    print(sorted(final_numbers_set))
